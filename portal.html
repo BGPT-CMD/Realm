@@ -1,0 +1,198 @@
+<!-- portal.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Star Portal</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      height:100vh;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at center,
+        #160024 0%,
+        #070014 40%,
+        #000000 100%);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      font-family:Arial, sans-serif;
+      color:white;
+      position:relative;
+    }
+
+    /* DISTANT GLOWING STARS */
+    .space{
+      position:absolute;
+      width:100%;
+      height:100%;
+      overflow:hidden;
+    }
+
+    .star{
+      position:absolute;
+      width:3px;
+      height:3px;
+      background:white;
+      border-radius:50%;
+      box-shadow:
+        0 0 10px white,
+        0 0 20px #88ccff;
+      animation: twinkle infinite alternate;
+    }
+
+    @keyframes twinkle{
+      from{
+        opacity:0.3;
+        transform:scale(0.8);
+      }
+      to{
+        opacity:1;
+        transform:scale(1.4);
+      }
+    }
+
+    .portal-star{
+      width:220px;
+      height:220px;
+      background:
+        radial-gradient(circle,
+        #ffffff 0%,
+        #99ddff 20%,
+        #5599ff 50%,
+        rgba(255,255,255,0) 100%);
+      clip-path: polygon(
+        50% 0%, 61% 35%, 98% 35%,
+        68% 57%, 79% 91%, 50% 70%,
+        21% 91%, 32% 57%, 2% 35%, 39% 35%
+      );
+
+      box-shadow:
+        0 0 30px #66ccff,
+        0 0 80px #3399ff,
+        0 0 150px #00ccff;
+
+      animation:
+        spin 18s linear infinite,
+        glow 3s ease-in-out infinite;
+
+      margin-bottom:50px;
+    }
+
+    @keyframes spin{
+      from{
+        transform:rotate(0deg);
+      }
+      to{
+        transform:rotate(360deg);
+      }
+    }
+
+    @keyframes glow{
+      0%,100%{
+        filter:brightness(1);
+      }
+      50%{
+        filter:brightness(1.6);
+      }
+    }
+
+    .chat-link{
+      color:#8ed8ff;
+      text-decoration:none;
+      font-size:1.3rem;
+      padding:18px 36px;
+      border:2px solid #66ccff;
+      border-radius:50px;
+      backdrop-filter:blur(6px);
+
+      box-shadow:
+        0 0 10px #66ccff,
+        0 0 25px #3399ff,
+        inset 0 0 20px rgba(102,204,255,0.4);
+
+      animation: linkGlow 2s infinite alternate;
+
+      transition:0.3s ease;
+      z-index:10;
+    }
+
+    .chat-link:hover{
+      transform:scale(1.08);
+      color:white;
+
+      box-shadow:
+        0 0 20px white,
+        0 0 40px #66ccff,
+        0 0 80px #00ccff;
+    }
+
+    @keyframes linkGlow{
+      from{
+        opacity:0.7;
+      }
+      to{
+        opacity:1;
+      }
+    }
+
+    .title{
+      position:absolute;
+      top:50px;
+      font-size:2rem;
+      letter-spacing:6px;
+      text-shadow:
+        0 0 10px white,
+        0 0 20px #66ccff;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="space" id="space"></div>
+
+  <div class="title">THE COSMIC PORTAL</div>
+
+  <div class="portal-star"></div>
+
+  <a
+    class="chat-link"
+    href="https://chat.google.com/room/AAQARLGpD10?cls=7"
+    target="_blank"
+  >
+    Enter The Glowing Portal
+  </a>
+
+  <script>
+    const space = document.getElementById('space');
+
+    for(let i = 0; i < 180; i++){
+      const star = document.createElement('div');
+      star.classList.add('star');
+
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+
+      const size = Math.random() * 4 + 1;
+      star.style.width = size + 'px';
+      star.style.height = size + 'px';
+
+      star.style.animationDuration =
+        (Math.random() * 3 + 1) + 's';
+
+      space.appendChild(star);
+    }
+  </script>
+
+</body>
+</html>
